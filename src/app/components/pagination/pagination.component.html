@@ -1,0 +1,10 @@
+<!-- Reusable pagination controls -->
+<div class="d-flex justify-content-between align-items-center mt-4">
+  <button class="btn btn-outline-secondary btn-sm" [disabled]="!hasPrev" (click)="onPrev()">
+    {{ constants.LABELS.PREVIOUS }}
+  </button>
+  <span class="text-muted small">Page {{ currentPage }} of {{ totalPages }}</span>
+  <button class="btn btn-outline-secondary btn-sm" [disabled]="!hasNext" (click)="onNext()">
+    {{ constants.LABELS.NEXT }}
+  </button>
+</div>

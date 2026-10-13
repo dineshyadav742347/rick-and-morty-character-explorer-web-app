@@ -1,0 +1,19 @@
+<!-- Simple header without icons and simple dropdown -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/characters">
+      {{ constants.LABELS.APP_TITLE }}
+    </a>
+    <div class="ms-auto">
+      <div class="dropdown">
+        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Role: {{ authService.currentRole() }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><button class="dropdown-item" (click)="onRoleChange(constants.ROLES.ADMIN)">Admin</button></li>
+          <li><button class="dropdown-item" (click)="onRoleChange(constants.ROLES.VIEWER)">Viewer</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

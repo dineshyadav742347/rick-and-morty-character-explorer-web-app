@@ -1,0 +1,90 @@
+<!-- Character detail view template -->
+<div class="container py-4">
+  
+  <!-- Back button -->
+  <div class="mb-3">
+    <a routerLink="/characters" class="btn btn-outline-secondary btn-sm">
+      {{ constants.LABELS.BACK_TO_CHARACTERS }}
+    </a>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="loading()" class="text-center py-5">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading details...</span>
+    </div>
+  </div>
+
+  <!-- Character details container -->
+  <div *ngIf="!loading() && character() as char">
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="row g-0">
+        <div class="col-md-3 text-center bg-dark text-white p-3 d-flex align-items-center justify-content-center">
+          <img [src]="char.image" [alt]="char.name" class="img-fluid rounded" style="max-height: 180px;">
+        </div>
+        <div class="col-md-9">
+          <div class="card-body p-4">
+            <h2 class="card-title fw-bold mb-3">{{ char.name }}</h2>
+            <div class="row g-3">
+              <div class="col-sm-6 col-lg-3">
+                <span class="text-muted small d-block">Status</span>
+                <span class="fw-semibold">{{ char.status }}</span>
+              </div>
+              <div class="col-sm-6 col-lg-3">
+                <span class="text-muted small d-block">Species</span>
+                <span class="fw-semibold">{{ char.species }}</span>
+              </div>
+              <div class="col-sm-6 col-lg-3">
+                <span class="text-muted small d-block">Gender</span>
+                <span class="fw-semibold">{{ char.gender }}</span>
+              </div>
+              <div class="col-sm-6 col-lg-3">
+                <span class="text-muted small d-block">Origin</span>
+                <span class="fw-semibold">{{ char.origin.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Episodes table section -->
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold">Episodes ({{ filteredEpisodes().length }})</h5>
+        <div style="width: 250px;">
+          <input 
+            type="text" 
+            class="form-control form-control-sm" 
+            [placeholder]="constants.LABELS.EPISODE_SEARCH_PLACEHOLDER" 
+            [(ngModel)]="episodeSearchQuery" 
+            (input)="filterEpisodes()">
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col" class="ps-3">Episode Code</th>
+              <th scope="col">Name</th>
+              <th scope="col" class="pe-3">Air Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="episodesLoading()">
+              <td colspan="3" class="text-center py-3">Loading episodes...</td>
+            </tr>
+            <tr *ngIf="!episodesLoading() && filteredEpisodes().length === 0">
+              <td colspan="3" class="text-center py-3 text-muted">No episodes found.</td>
+            </tr>
+            <tr *ngFor="let ep of filteredEpisodes(); trackBy: trackByEpisodeId">
+              <td class="ps-3 fw-semibold">{{ ep.episode }}</td>
+              <td>{{ ep.name }}</td>
+              <td class="pe-3 text-muted">{{ ep.air_date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+# Compiled output & Angular caches
+dist/
+.angular/
+
+# Dependencies
+node_modules/
+
+# Package Manager Lock Files
+package-lock.json
+
+# IDEs and Editors (VS Code, WebStorm, etc.)
+.vscode/
+
+# Logs, Runtime data, and Diagnostics
+npm-debug.log*
+*.log
+
+# Operating System Junk Files
+.DS_Store
+.DS_Store?
+._*
